@@ -1,18 +1,22 @@
 package com.dayhan.crudspringkotlin.resources
 
 import com.dayhan.crudspringkotlin.domain.Categoria
+import com.dayhan.crudspringkotlin.service.CategoriaService
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(value = ["/categorias"])
-class CategoriaResource {
+class CategoriaResource(
+    private val categoriaService: CategoriaService
+) {
 
-    @RequestMapping(method = [RequestMethod.GET])
-    fun listar(): List<Categoria> {
-        val cat1 = Categoria(1, "Informática")
-        val cat2 = Categoria(2, "Escritório")
-        return listOf(cat1, cat2)
+    @GetMapping(value = ["/{id}"])
+    fun find(@PathVariable id: Int): ResponseEntity<Categoria>? {
+        val categoria: Categoria? = categoriaService.find(id)
+        return categoria?.let { ResponseEntity.ok(it) }
     }
 }
