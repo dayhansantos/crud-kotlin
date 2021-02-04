@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface CategoriaRepository : CrudRepository<Categoria, Int> {
-    override fun findById(id: Int): Optional<Categoria>
-}
+interface CategoriaRepository : CrudRepository<Categoria, Int>

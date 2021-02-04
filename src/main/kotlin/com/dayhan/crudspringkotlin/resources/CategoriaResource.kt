@@ -15,8 +15,9 @@ class CategoriaResource(
 ) {
 
     @GetMapping(value = ["/{id}"])
-    fun find(@PathVariable id: Int): ResponseEntity<Categoria>? {
-        val categoria: Categoria? = categoriaService.find(id)
-        return categoria?.let { ResponseEntity.ok(it) }
+    fun find(@PathVariable id: Int): ResponseEntity<Categoria> {
+        return categoriaService.find(id)
+            .map { ResponseEntity.ok(it) }
+            .orElse(ResponseEntity.notFound().build())
     }
 }
