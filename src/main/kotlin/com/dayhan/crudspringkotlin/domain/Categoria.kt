@@ -1,13 +1,14 @@
 package com.dayhan.crudspringkotlin.domain
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Categoria(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int?,
-    val nome: String)
+    val id: Int? = null,
+    val nome: String = "")
+{
+    @ManyToMany(mappedBy = "categorias")
+    val produtos: MutableList<Produto> = mutableListOf()
+}
