@@ -9,5 +9,5 @@ import javax.persistence.Id
 data class Categoria(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Int?,
     val nome: String)
