@@ -1,5 +1,6 @@
 package com.dayhan.crudspringkotlin.domain
 
+import com.dayhan.crudspringkotlin.dto.ProdutoDto
 import javax.persistence.*
 
 @Entity
@@ -18,3 +19,5 @@ data class Produto(
     )
     val categorias: MutableList<Categoria> = mutableListOf()
 }
+
+fun Produto.toDto() = ProdutoDto(id, nome, preco)

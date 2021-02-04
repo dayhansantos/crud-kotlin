@@ -1,6 +1,6 @@
 package com.dayhan.crudspringkotlin.resources
 
-import com.dayhan.crudspringkotlin.domain.Categoria
+import com.dayhan.crudspringkotlin.dto.CategoriaDto
 import com.dayhan.crudspringkotlin.service.CategoriaService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,9 +15,8 @@ class CategoriaResource(
 ) {
 
     @GetMapping(value = ["/{id}"])
-    fun find(@PathVariable id: Int): ResponseEntity<Categoria> {
-        return categoriaService.find(id)
-            .map { ResponseEntity.ok(it) }
-            .orElse(ResponseEntity.notFound().build())
+    fun find(@PathVariable id: Int): ResponseEntity<CategoriaDto> {
+        val categoria = categoriaService.find(id)
+        return ResponseEntity.ok(categoria)
     }
 }
